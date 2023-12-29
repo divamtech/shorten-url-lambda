@@ -28,4 +28,30 @@ MYSQL_DB || 'shorten_db'
 
 ```
 
-### See the postman to using it. `shorten.postman_collection.json`
+### APIs
+
+```sh
+curl --location 'localhost:3000/api/urls' \
+--header 'x-auth-token: test' \
+--header 'Content-Type: application/json' \
+--data '{
+    "url": "https://divamtech.com"
+}'
+```
+
+response
+
+```json
+{
+  "id": 2,
+  "code": "05174b16cf",
+  "url": "https://divamtech.com",
+  "link": "http://localhost:3000/05174b16cf"
+}
+```
+
+link http://localhost:3000/05174b16cf will redirect to https://divamtech.com
+
+See complete Postman collection `shorten.postman_collection.json`
+
+## Voila!

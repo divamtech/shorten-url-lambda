@@ -63,7 +63,6 @@ router.post('/urls', async (req, res) => {
 
 router.delete('/urls/:code', async (req, res) => {
   const result = await knex(TABLE).where('code', req.params.code).del()
-  console.log('asdfasdfasdf----------', result)
   if (result) {
     res.json({ message: 'URL deleted' })
   } else {

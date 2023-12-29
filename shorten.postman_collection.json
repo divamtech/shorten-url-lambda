@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "888fd070-ef71-496c-9023-87edf9515672",
+		"name": "shorten",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28447036",
+		"_collection_link": "https://webledger.postman.co/workspace/Team-Workspace~4535a30e-8e43-4bad-8aed-7e03f7166075/collection/28447036-888fd070-ef71-496c-9023-87edf9515672?action=share&source=collection_link&creator=28447036"
+	},
+	"item": [
+		{
+			"name": "direct code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/1703851972504",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"1703851972504"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all urls",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "test",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/urls",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"urls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "test",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://divamtech.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/urls",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"urls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete url",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "test",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/urls/1703851663675",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"urls",
+						"1703851663675"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

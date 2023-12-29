@@ -40,14 +40,21 @@ router.use((req, res, next) => {
 })
 
 router.get('/urls', async (req, res) => {
-  const result = await knex.select('*').from(TABLE)
-  res.json(result)
+  const [{ total }] = await knex(TABLE).count('id', { as: 'total' })
+  const page = req.query.page && req.query.page > 0 ? req.query.page : 1
+  const limit = req.query.limit && req.query.limit <= 30 ? req.query.limit : 10
+  const models = await knex
+    .select('*')
+    .from(TABLE)
+    .limit(limit)
+    .offset((page - 1) * limit)
+  res.json({ data: models.map((m) => ({ ...m, link: SELF_URL + m.code })), meta: { page, limit, total } })
 })
 
 router.post('/urls', async (req, res) => {
   const url = req.body.url.trim()
-  const hasModel = await knex(TABLE).where('url', url).first()
-  if (hasModel) return res.json({ ...hasModel, link: SELF_URL + hasModel.code })
+  const existingModel = await knex(TABLE).where('url', url).first()
+  if (existingModel) return res.json({ ...existingModel, link: SELF_URL + existingModel.code })
 
   var code = req.body.code || crypto.createHash('md5').update(url).digest('hex').slice(0, 10)
   const [id] = await knex(TABLE).insert({ code, url })
@@ -56,10 +63,11 @@ router.post('/urls', async (req, res) => {
 
 router.delete('/urls/:code', async (req, res) => {
   const result = await knex(TABLE).where('code', req.params.code).del()
+  console.log('asdfasdfasdf----------', result)
   if (result) {
-    res.json({ message: 'Url deleted' })
+    res.json({ message: 'URL deleted' })
   } else {
-    res.json({ message: 'Url not found' })
+    res.status(404).json({ message: 'URL not found' })
   }
 })
 

@@ -4,7 +4,7 @@ const crypto = require('crypto')
 
 const SELF_URL = process.env.SELF_URL || 'http://localhost:3000/'
 const AUTH_TOKEN = process.env.AUTH_TOKEN || 'test'
-const TABLE = 'urls'
+const TABLE = 'shorten_urls'
 const knex = require('knex')({
   client: 'mysql2',
   connection: {
